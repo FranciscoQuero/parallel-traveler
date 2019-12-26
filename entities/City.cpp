@@ -17,7 +17,7 @@ class City
 		string name;
 };
 
-City:City(double _x, double _y, string _name) {
+City::City(double _x, double _y, string _name) {
 	x = _x;
 	y = _y;
 	name = _name;
@@ -36,8 +36,8 @@ string City::getName() {
 }
 
 double City::calculateEuclideanDistance(City city) {
-	_x = city.getX();
-	_y = city.getY();
+	double _x = city.getX();
+	double _y = city.getY();
 
 	return sqrt(pow(x - _x, 2) + pow(y - _y, 2));
 }

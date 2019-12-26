@@ -3,20 +3,20 @@
 
 using namespace std;
 
-class Route 
+class Route
 {
 	public:
 		Route(int length);
 		void setCities(int position, int city);
 		int getCities(int position);
 		void addCity(int position);
-		int[] getCities();
+		int getCities();
 		int getNumberOfCities();
 		void insertCity(int position, int value);
 		string toString();
 
 	private:
-		int cities[];
+		int *cities;
 		int numberOfCities;
 };
 
@@ -42,8 +42,8 @@ void Route::addCity(int position) {
 	numberOfCities++;
 }
 
-int[] Route::getCities(){
-	return cities;
+int Route::getCities(){
+	return *cities;
 }
 
 void Route::insertCity(int position, int value) {
@@ -61,16 +61,16 @@ void Route::insertCity(int position, int value) {
 }
 
 string Route::toString() {
-	string textRoute = '{';
+	string textRoute = "{";
 
 	for (int i = 0; i < numberOfCities; i++) {
 		if (i != numberOfCities-1)
-			textRoute += cities[i] + ',';
+			textRoute += cities[i] + ",";
 		else
 			textRoute += cities[i];
 	}
 
-	textRoute += '}';
+	textRoute += "}";
 
 	return textRoute;
 }
