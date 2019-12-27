@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 
 using namespace std;
 
@@ -30,7 +30,7 @@ void Route::setCities(int position, int city) {
 }
 
 int Route::getCities(int position) {
-	return cities[position % numberOfCities];
+	return cities[position];
 }
 
 int Route::getNumberOfCities() {

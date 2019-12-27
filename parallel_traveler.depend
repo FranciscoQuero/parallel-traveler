@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1577475170 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\entities\city.cpp
+	<iostream>
+	<math.h>
+	<string>
+
+1577475170 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\entities\route.cpp
+	<iostream>
+	<string>
+
+1577475170 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\problem.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<vector>
+	<City.h>
+	<Route.h>
+
+1577475139 c:\users\francis\desktop\parallel-traveler\parallel-traveler\include\city.h
+	<string>
+
+1577398095 c:\users\francis\desktop\parallel-traveler\parallel-traveler\include\route.h
+
