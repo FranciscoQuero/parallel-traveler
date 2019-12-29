@@ -1,3 +1,5 @@
+#include <string>
+
 #ifndef ROUTE_H_INCLUDED
 #define ROUTE_H_INCLUDED
 

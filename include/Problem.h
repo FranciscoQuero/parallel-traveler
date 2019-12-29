@@ -1,4 +1,11 @@
+#include <iostream>
+#include <string>
+#include <fstream>
 #include <vector>
+#include <City.h>
+#include <Route.h>
+
+using namespace std;
 
 #ifndef PROBLEM_H
 #define PROBLEM_H
@@ -7,9 +14,8 @@
 class Problem
 {
     public:
-        Problem();
         Problem(vector<City> _cities);
-        Problem readCitiesFromFile(ifstream citiesFile);
+        static Problem readCitiesFromFile(ifstream citiesFile);
         int getNumberOfCities();
         City getCity(int position);
         double getDistance(int position1, int position2);

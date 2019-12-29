@@ -5,16 +5,15 @@
 #include <City.h>
 #include <Route.h>
 
-#define MAXIMUM_LENGTH 10000
+#define MAXIMUM_LENGTH 1000
 
 using namespace std;
 
 class Problem
 {
     public:
-        Problem();
         Problem(vector<City> _cities);
-        Problem readCitiesFromFile(ifstream citiesFile);
+        static Problem readCitiesFromFile(ifstream citiesFile);
         int getNumberOfCities();
         City getCity(int position);
         double getDistance(int position1, int position2);
@@ -22,17 +21,15 @@ class Problem
 
     private:
         vector<City> cities;
-        double distanceMatrix[][MAXIMUM_LENGTH];
+        double distanceMatrix[MAXIMUM_LENGTH][MAXIMUM_LENGTH];
 };
 
-Problem::Problem() {};
-
 Problem::Problem(vector<City> _cities) {
-    vector<City> cities = _cities;
-    int length = cities.size();
+    vector<City> cities(_cities);
+    const int length = cities.size();
+    cout << "LENGTH PROBLEMA " << length;
     City currentCity(0, 0, "dummy"), auxCity(0, 0, "dummy");
-
-    //distanceMatrix = new double [length][length];
+    //double _distanceMatrix[length][length];
 
     for (int i = 0; i < length; i++){
         currentCity = cities.at(i);
@@ -41,6 +38,9 @@ Problem::Problem(vector<City> _cities) {
             distanceMatrix[i][j] = currentCity.calculateEuclideanDistance(auxCity);
         }
     }
+    //this->distanceMatrix = _distanceMatrix;
+
+    cout << "LENGTH PROBLEMA " << distanceMatrix[0][6];
 };
 
 Problem Problem::readCitiesFromFile(ifstream citiesFile) {
