@@ -14,10 +14,13 @@ class Route
 		int getNumberOfCities();
 		void insertCity(int position, int value);
 		string toString();
+		void setCost(double newCost);
+		double getCost();
 
 	private:
 		int *cities;
 		int numberOfCities;
+		double cost;
 };
 
 Route::Route(int length) {
@@ -73,4 +76,12 @@ string Route::toString() {
 	textRoute += "}";
 
 	return textRoute;
+}
+
+void Route::setCost(double newCost) {
+    cost = newCost;
+}
+
+double Route::getCost() {
+    return cost;
 }

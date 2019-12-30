@@ -14,10 +14,13 @@ class Route
 		int getNumberOfCities();
 		void insertCity(int position, int value);
 		std::string toString();
+		void setCost(double newCost);
+		double getCost();
 
 	private:
 		int *cities;
 		int numberOfCities;
+		double cost;
 };
 
 #endif // ROUTE_H_INCLUDED

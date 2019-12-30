@@ -36,7 +36,6 @@ Problem readCitiesFromFile() {
         citiesFile.close();
     }
     Problem problemica(cities);
-    cout << "\nlee files - " << problemica.getDistance(1, 2);
     return problemica;
 }
 
@@ -46,12 +45,10 @@ int main () {
     long timeStart, timeEnd;
 
     Problem problem = readCitiesFromFile();
-    cout << "Entrando en el montecarlo\n - " << problem.getNumberOfCities();
-    cout << "\nlee files - " << problem.getDistance(1, 2);
     // TODO: time
     Route route = MontecarloHeuristic::solveMontecarlo(problem);
 
-    cout << "Total Cities: " << route.getNumberOfCities();
+    cout << "Best cost: " << route.getCost();
 
     return 0;
 }

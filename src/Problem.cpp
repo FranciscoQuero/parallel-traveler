@@ -39,7 +39,7 @@ Problem::Problem(vector<City> _cities) {
         vector<double> row;//creates empty row
         for (int j = 0; j < length; j++) {
             auxCity = cities.at(j);
-            cout << "\n-- I: " << i << " - J: " << j << " \n";
+            //cout << "\n-- I: " << i << " - J: " << j << " \n";
             //distanceMatrix[i][j] = currentCity.calculateEuclideanDistance(auxCity); //rompe aqui cuando i=6, j=22
             //a[i][j] = currentCity.calculateEuclideanDistance(auxCity);
             currentDistance = currentCity.calculateEuclideanDistance(auxCity);
@@ -89,11 +89,12 @@ double Problem::getDistance(int position1, int position2) {
 double Problem::cost(Route route){
     double distance = 0;
     int total = route.getNumberOfCities();
-    City auxCity = City(0, 0, "dummy");
+    City currentCity(0,0,"dummy"), auxCity(0, 0, "dummy");
 
     for (int i = 0; i < total-1; i++) {
-        auxCity = cities.at(i+1);
-        distance += cities.at(i).calculateEuclideanDistance(auxCity);
+        currentCity = cities.at(route.getCities(i));
+        auxCity = cities.at(route.getCities(i+1));
+        distance += currentCity.calculateEuclideanDistance(auxCity);
     }
 
     return distance;
