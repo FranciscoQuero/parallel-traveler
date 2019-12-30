@@ -9,7 +9,12 @@
  
  - Montecarlo Heuristic: It implements the Montecarlo heuristic. It shuffles the whole Route 
  
+ (WIP)
+ 
+ It includes a CodeBlocks project so that you can import it and start working on it!
+ 
  TODO:
+ - Clean unneeded files.
  - Refactor and move classes in order to follow Clean Code and Clean Architecture guidelines (e.g. entities, use cases; method with less than 16 lines, single responsibility...).
  - Better metrics such as Time tracking, results summary (e.g. # of cities, # of iterations, etc).
  
