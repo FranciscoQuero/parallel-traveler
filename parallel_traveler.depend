@@ -13,13 +13,14 @@
 	<fstream>
 	<MontecarloHeuristic.h>
 
-1577726844 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\montecarloheuristic.cpp
+1577727364 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\montecarloheuristic.cpp
 	"MontecarloHeuristic.h"
 	<City.h>
 	<Route.h>
 	<Problem.h>
 	<algorithm>
 	<ctime>
+	<time.h>
 
 1577726509 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\problem.cpp
 	<iostream>

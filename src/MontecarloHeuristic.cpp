@@ -4,6 +4,7 @@
 #include <Problem.h>
 #include <algorithm>
 #include <ctime>
+#include <time.h>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ Route MontecarloHeuristic::solveMontecarlo(Problem problem) {
     bool isFirstIteration = true;
     double totalCost = 0, currentCost;
     Route route(0), lessCostRoute(0);
+    srand (time(NULL));
 
     for (int i = 0; i < totalCities; i++)
         routeInt.push_back(i);
