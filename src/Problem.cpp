@@ -5,7 +5,7 @@
 #include <City.h>
 #include <Route.h>
 
-#define MAXIMUM_LENGTH 1000
+#define MAXIMUM_LENGTH 101
 
 using namespace std;
 
@@ -21,26 +21,32 @@ class Problem
 
     private:
         vector<City> cities;
-        double distanceMatrix[MAXIMUM_LENGTH][MAXIMUM_LENGTH];
+        //double distanceMatrix[52][52];
+        vector<vector<double > > distanceMatrix;
 };
 
 Problem::Problem(vector<City> _cities) {
+    double currentDistance;
     vector<City> cities(_cities);
     const int length = cities.size();
     cout << "LENGTH PROBLEMA " << length;
     City currentCity(0, 0, "dummy"), auxCity(0, 0, "dummy");
-    //double _distanceMatrix[length][length];
+
+    this->cities = _cities;
 
     for (int i = 0; i < length; i++){
         currentCity = cities.at(i);
+        vector<double> row;//creates empty row
         for (int j = 0; j < length; j++) {
             auxCity = cities.at(j);
-            distanceMatrix[i][j] = currentCity.calculateEuclideanDistance(auxCity);
+            cout << "\n-- I: " << i << " - J: " << j << " \n";
+            //distanceMatrix[i][j] = currentCity.calculateEuclideanDistance(auxCity); //rompe aqui cuando i=6, j=22
+            //a[i][j] = currentCity.calculateEuclideanDistance(auxCity);
+            currentDistance = currentCity.calculateEuclideanDistance(auxCity);
+            row.push_back(currentDistance);
         }
+        distanceMatrix.push_back(row);
     }
-    //this->distanceMatrix = _distanceMatrix;
-
-    cout << "LENGTH PROBLEMA " << distanceMatrix[0][6];
 };
 
 Problem Problem::readCitiesFromFile(ifstream citiesFile) {
@@ -54,8 +60,6 @@ Problem Problem::readCitiesFromFile(ifstream citiesFile) {
         citiesFile >> dimensionInput;
         if (DIMENSION.compare(dimensionInput) == 0) {
             citiesFile >> citiesTotal;
-        } else {
-            //citiesTotal = dimensionInput;
         }
 
         for (int i = 0; i < citiesTotal; i++) {

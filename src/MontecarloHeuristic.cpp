@@ -7,7 +7,7 @@
 using namespace std;
 
 Route MontecarloHeuristic::solveMontecarlo(Problem problem) {
-    const int ITERATIONS = 10000;
+    const int ITERATIONS = 100;
     vector<int> routeInt;
     int totalCities = problem.getNumberOfCities();
     bool isFirstIteration = true;
@@ -25,6 +25,9 @@ Route MontecarloHeuristic::solveMontecarlo(Problem problem) {
             route.addCity(routeInt.at(j));
 
         currentCost = problem.cost(route);
+
+        cout << "\n - CURRENT COST: " << currentCost << " - \n";
+        cout << "\n - OLD COST: " << totalCost << " - \n";
 
         if (isFirstIteration) {
             totalCost = currentCost;

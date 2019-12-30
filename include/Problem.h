@@ -23,7 +23,7 @@ class Problem
 
     private:
         vector<City> cities;
-        double distanceMatrix[][MAXIMUM_LENGTH];
+        vector<vector<double > > distanceMatrix;
 };
 
 #endif // PROBLEM_H
