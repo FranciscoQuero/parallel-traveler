@@ -20,11 +20,8 @@ Problem readCitiesFromFile() {
 
     if ( citiesFile.is_open() ) {
         citiesFile >> dimensionInput;
-        if (DIMENSION.compare(dimensionInput) == 0) {
+        if (DIMENSION.compare(dimensionInput) == 0)
             citiesFile >> citiesTotal;
-        } else {
-            //citiesTotal = dimensionInput;
-        }
 
         for (int i = 0; i < citiesTotal; i++) {
             citiesFile >> name;
@@ -40,9 +37,8 @@ Problem readCitiesFromFile() {
 }
 
 int main () {
-    //Route route = 0;
-    int start = 0;
-    long timeStart, timeEnd;
+    //int start = 0;
+    //long timeStart, timeEnd;
 
     Problem problem = readCitiesFromFile();
     // TODO: time
