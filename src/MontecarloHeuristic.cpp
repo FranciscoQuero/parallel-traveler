@@ -1,15 +1,14 @@
 #include "MontecarloHeuristic.h"
-#include <City.h>
-#include <Route.h>
-#include <Problem.h>
+#include "City.h"
+#include "Route.h"
+#include "Problem.h"
 #include <algorithm>
 #include <ctime>
 #include <time.h>
 
 using namespace std;
 
-Route MontecarloHeuristic::solveMontecarlo(Problem problem) {
-    const int ITERATIONS = 100;
+Route MontecarloHeuristic::solveMontecarlo(Problem problem, int iterations) {
     vector<int> routeInt;
     int totalCities = problem.getNumberOfCities();
     bool isFirstIteration = true;
@@ -20,7 +19,7 @@ Route MontecarloHeuristic::solveMontecarlo(Problem problem) {
     for (int i = 0; i < totalCities; i++)
         routeInt.push_back(i);
 
-    for (int i = 0; i < ITERATIONS; i++){
+    for (int i = 0; i < iterations; i++){
         random_shuffle (routeInt.begin(), routeInt.end());
         route = Route(totalCities);
 

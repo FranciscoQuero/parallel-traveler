@@ -1,10 +1,12 @@
-#include "MainTSP.h"
 #include <string>
-#include "City.h"
-#include <Route.h>
-#include <Problem.h>
 #include <fstream>
-#include <MontecarloHeuristic.h>
+#include <iostream>
+#include "Route.h"
+#include "Problem.h"
+#include "MontecarloHeuristic.h"
+#include "City.h"
+#include "MainTSP.h"
+#include <time.h>
 
 using namespace std;
 
@@ -32,19 +34,26 @@ Problem readCitiesFromFile() {
 
         citiesFile.close();
     }
-    Problem problemica(cities);
-    return problemica;
+    Problem problem(cities);
+    return problem;
 }
 
 int main () {
-    //int start = 0;
-    //long timeStart, timeEnd;
-
+    struct timespec startTime, endTime;
+    long double duration;
+    int iterations = 1000;
     Problem problem = readCitiesFromFile();
-    // TODO: time
-    Route route = MontecarloHeuristic::solveMontecarlo(problem);
+    clockid_t clk_id;
 
-    cout << "Best cost: " << route.getCost();
+    cout.precision(8);
+    clock_gettime(clk_id, &startTime);
+    Route route = MontecarloHeuristic::solveMontecarlo(problem, iterations);
+    clock_gettime(clk_id, &endTime);
+    duration = endTime.tv_sec - startTime.tv_sec;
+
+    cout << "Time spent: " << duration << " s." << endl;
+    cout << "Best cost: " << route.getCost() << endl;
+    cout << "Best route found: " << route.toString() << "\n\n";
 
     return 0;
 }

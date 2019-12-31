@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -64,16 +65,20 @@ void Route::insertCity(int position, int value) {
 }
 
 string Route::toString() {
-	string textRoute = "{";
+	string textRoute = "{", currentCityString;
+	stringstream currentCityStream;
 
 	for (int i = 0; i < numberOfCities; i++) {
+        currentCityStream << cities[i];
+        currentCityString = currentCityStream.str();
+        currentCityStream.str("");
+
+        textRoute.append(currentCityString);
 		if (i != numberOfCities-1)
-			textRoute += cities[i] + ",";
-		else
-			textRoute += cities[i];
+            textRoute.append(", ");
 	}
 
-	textRoute += "}";
+	textRoute.append("}");
 
 	return textRoute;
 }

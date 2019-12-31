@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string>
-#include <fstream>
 #include <vector>
 #include <City.h>
 #include <Route.h>
@@ -11,10 +8,9 @@ class Problem
 {
     public:
         Problem(vector<City> _cities);
-        static Problem readCitiesFromFile(ifstream citiesFile);
         int getNumberOfCities();
         City getCity(int position);
-        double getDistance(int position1, int position2);
+        double getDistance(int positionCity1, int positionCity2);
         double cost(Route route);
 
     private:
@@ -26,7 +22,7 @@ Problem::Problem(vector<City> _cities) {
     double currentDistance;
     vector<City> cities(_cities);
     const int length = cities.size();
-    City currentCity(0, 0, "dummy"), auxCity(0, 0, "dummy");
+    City currentCity(0, 0, ""), auxCity(0, 0, "");
 
     this->cities = _cities;
 
@@ -42,31 +38,6 @@ Problem::Problem(vector<City> _cities) {
     }
 };
 
-Problem Problem::readCitiesFromFile(ifstream citiesFile) {
-    int citiesTotal = 0;
-    string name, dimensionInput, auxDimensionInput;
-    string DIMENSION = "DIMENSION:";
-    double x, y;
-    vector<City> cities;
-
-    if ( citiesFile.is_open() ) {
-        citiesFile >> dimensionInput;
-        if (DIMENSION.compare(dimensionInput) == 0) {
-            citiesFile >> citiesTotal;
-        }
-
-        for (int i = 0; i < citiesTotal; i++) {
-            citiesFile >> name;
-            citiesFile >> x;
-            citiesFile >> y;
-            cities.push_back(City(x, y, name));
-        }
-        citiesFile.close();
-    }
-
-    return Problem(cities);
-}
-
 int Problem::getNumberOfCities(){
     return cities.size();
 }
@@ -75,14 +46,14 @@ City Problem::getCity(int position) {
     return cities.at(position);
 }
 
-double Problem::getDistance(int position1, int position2) {
-    return distanceMatrix[position1][position2];
+double Problem::getDistance(int positionCity1, int positionCity2) {
+    return distanceMatrix[positionCity1][positionCity2];
 }
 
 double Problem::cost(Route route){
     double distance = 0;
     int total = route.getNumberOfCities();
-    City currentCity(0,0,"dummy"), auxCity(0, 0, "dummy");
+    City currentCity(0,0,""), auxCity(0, 0, "");
 
     for (int i = 0; i < total-1; i++) {
         currentCity = cities.at(route.getCities(i));
