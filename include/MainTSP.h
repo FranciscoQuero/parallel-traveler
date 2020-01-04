@@ -10,8 +10,8 @@ using namespace std;
 class MainTSP
 {
     public:
-        main(int args);
-        Problem readCitiesFromFile();
+        main(int argc, char **argv);
+        Problem readCitiesFromFile(string filename);
 };
 
 #endif // MAINTSP_H

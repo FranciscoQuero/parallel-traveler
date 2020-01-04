@@ -7,10 +7,11 @@
 #include "City.h"
 #include "MainTSP.h"
 #include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 
-Problem readCitiesFromFile() {
+Problem readCitiesFromFile(string filename) {
     int citiesTotal = 0;
     string name, dimensionInput, auxDimensionInput;
     string DIMENSION = "DIMENSION:";
@@ -18,7 +19,7 @@ Problem readCitiesFromFile() {
     vector<City> cities;
     ifstream citiesFile;
 
-    citiesFile.open("file.txt");
+    citiesFile.open(filename.c_str());
 
     if ( citiesFile.is_open() ) {
         citiesFile >> dimensionInput;
@@ -38,12 +39,21 @@ Problem readCitiesFromFile() {
     return problem;
 }
 
-int main () {
+int main (int argc, char **argv) {
     struct timespec startTime, endTime;
     long double duration;
-    int iterations = 1000;
-    Problem problem = readCitiesFromFile();
+    int iterations = 10000;
+    string filename = "file.txt";
     clockid_t clk_id;
+
+    if (argc < 3) {
+        cout << "You must provide the number of iterations and the filename. Using 10,000 iterations and file.txt\n";
+    } else {
+        iterations = atoi(argv[2]);
+        filename = argv[1];
+    }
+
+    Problem problem = readCitiesFromFile(filename);
 
     cout.precision(8);
     clock_gettime(clk_id, &startTime);
