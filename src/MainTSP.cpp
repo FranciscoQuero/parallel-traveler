@@ -41,13 +41,12 @@ Problem readCitiesFromFile(string filename) {
 
 int main (int argc, char **argv) {
     struct timespec startTime, endTime;
-    long double duration;
+    double duration;
     int iterations = 10000;
     string filename = "file.txt";
-    clockid_t clk_id;
 
     if (argc < 3) {
-        cout << "You must provide the number of iterations and the filename. Using 10,000 iterations and file.txt\n";
+        cout << "You should provide the number of iterations and the filename. Using 10,000 iterations and file.txt\n";
     } else {
         iterations = atoi(argv[2]);
         filename = argv[1];
@@ -55,11 +54,11 @@ int main (int argc, char **argv) {
 
     Problem problem = readCitiesFromFile(filename);
 
-    cout.precision(8);
-    clock_gettime(clk_id, &startTime);
+    //cout.precision(8);
+    clock_gettime(CLOCK_REALTIME, &startTime);
     Route route = MontecarloHeuristic::solveMontecarlo(problem, iterations);
-    clock_gettime(clk_id, &endTime);
-    duration = endTime.tv_sec - startTime.tv_sec;
+    clock_gettime(CLOCK_REALTIME, &endTime);
+    duration = (double)(endTime.tv_sec-startTime.tv_sec) + (double)((endTime.tv_nsec-startTime.tv_nsec)/(1.e+9));
 
     cout << "Time spent: " << duration << " s." << endl;
     cout << "Best cost: " << route.getCost() << endl;

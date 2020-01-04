@@ -5,6 +5,7 @@
 		<Option title="parallel_traveller" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="src\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/parallel_traveller" prefix_auto="1" extension_auto="1" />
@@ -33,11 +34,21 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/City.h" />
-		<Unit filename="include/MainTSP.h" />
-		<Unit filename="include/MontecarloHeuristic.h" />
-		<Unit filename="include/Problem.h" />
-		<Unit filename="include/Route.h" />
+		<Unit filename="include/City.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="include/MainTSP.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="include/MontecarloHeuristic.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="include/Problem.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="include/Route.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/City.cpp" />
 		<Unit filename="src/MainTSP.cpp" />
 		<Unit filename="src/MontecarloHeuristic.cpp" />

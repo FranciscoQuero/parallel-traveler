@@ -1,5 +1,5 @@
 #include <string>
-#include <Problem.h>
+#include "Problem.h"
 #include <omp.h>
 
 #ifndef MAINTSP_H
@@ -10,7 +10,7 @@ using namespace std;
 class MainTSP
 {
     public:
-        main(int argc, char **argv);
+        int main(int argc, char **argv);
         Problem readCitiesFromFile(string filename);
 };
 
