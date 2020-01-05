@@ -1,6 +1,6 @@
 IDIR =../src
 CC=g++
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -static-libstdc++
 
 ODIR=src
 
