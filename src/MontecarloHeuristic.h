@@ -1,5 +1,6 @@
 #include "Route.h"
 #include "Problem.h"
+#include <omp.h>
 
 #ifndef MONTECARLOHEURISTIC_H
 #define MONTECARLOHEURISTIC_H

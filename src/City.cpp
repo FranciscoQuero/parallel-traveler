@@ -7,6 +7,7 @@ using namespace std;
 class City
 {
 	public:
+	    City();
 		City(double x, double y, string name);
 		double getX();
 		double getY();
@@ -16,6 +17,12 @@ class City
 		double x, y;
 		string name;
 };
+
+City::City() {
+    x = 0;
+    y = 0;
+    name = "this is a test name";
+}
 
 City::City(double _x, double _y, string _name) {
 	x = _x;

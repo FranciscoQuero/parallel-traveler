@@ -4,7 +4,7 @@
 	<math.h>
 	<string>
 
-1577799518 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\maintsp.cpp
+1578503393 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\maintsp.cpp
 	<string>
 	<fstream>
 	<iostream>
@@ -13,9 +13,10 @@
 	"MontecarloHeuristic.h"
 	"City.h"
 	"MainTSP.h"
-	<ctime>
+	<time.h>
+	<stdlib.h>
 
-1578179119 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\montecarloheuristic.cpp
+1578503624 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\montecarloheuristic.cpp
 	"MontecarloHeuristic.h"
 	"City.h"
 	"Route.h"
@@ -23,9 +24,11 @@
 	<algorithm>
 	<ctime>
 	<time.h>
+	<omp.h>
 
-1578179119 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\problem.cpp
+1578503624 source:c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\problem.cpp
 	<vector>
+	<omp.h>
 	"City.h"
 	"Route.h"
 
@@ -34,18 +37,25 @@
 	<string>
 	<sstream>
 
-1578169232 c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\montecarloheuristic.h
+1578503302 c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\montecarloheuristic.h
 	"Route.h"
 	"Problem.h"
+	<omp.h>
 
 1577726857 c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\route.h
 	<string>
 
-1578178029 c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\problem.h
+1578503302 c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\problem.h
 	<vector>
 	"City.h"
 	"Route.h"
+	<omp.h>
 
 1577475139 c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\city.h
 	<string>
+
+1578169491 c:\users\francis\desktop\parallel-traveler\parallel-traveler\src\maintsp.h
+	<string>
+	"Problem.h"
+	<omp.h>
 

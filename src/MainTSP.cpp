@@ -6,8 +6,8 @@
 #include "MontecarloHeuristic.h"
 #include "City.h"
 #include "MainTSP.h"
-#include <time.h>
 #include <stdlib.h>
+#include <omp.h>
 
 using namespace std;
 
@@ -40,8 +40,7 @@ Problem readCitiesFromFile(string filename) {
 }
 
 int main (int argc, char **argv) {
-    struct timespec startTime, endTime;
-    double duration;
+    double startTime, endTime, duration;
     int iterations = 10000;
     string filename = "file.txt";
 
@@ -55,14 +54,15 @@ int main (int argc, char **argv) {
     Problem problem = readCitiesFromFile(filename);
 
     //cout.precision(8);
-    clock_gettime(CLOCK_REALTIME, &startTime);
+    startTime = omp_get_wtime();
     Route route = MontecarloHeuristic::solveMontecarlo(problem, iterations);
-    clock_gettime(CLOCK_REALTIME, &endTime);
-    duration = (double)(endTime.tv_sec-startTime.tv_sec) + (double)((endTime.tv_nsec-startTime.tv_nsec)/(1.e+9));
+    endTime = omp_get_wtime();
+    duration = endTime - startTime;
 
     cout << "Time spent: " << duration << " s." << endl;
     cout << "Best cost: " << route.getCost() << endl;
-    cout << "Best route found: " << route.toString() << "\n\n";
+    if (route.getNumberOfCities() < 150)
+        cout << "Best route found: " << route.toString() << "\n\n";
 
     return 0;
 }

@@ -53,11 +53,11 @@ double Problem::getDistance(int positionCity1, int positionCity2) {
 double Problem::cost(Route route){
     double distance = 0;
     int total = route.getNumberOfCities();
-    City currentCity(0,0,""), auxCity(0, 0, "");
 
+    // We do not parallelize this loop because the overhead is always worse than the parallelization time saving
     for (int i = 0; i < total-1; i++) {
-        currentCity = cities.at(route.getCities(i));
-        auxCity = cities.at(route.getCities(i+1));
+        City currentCity = cities.at(route.getCities(i));
+        City auxCity = cities.at(route.getCities(i+1));
         distance += currentCity.calculateEuclideanDistance(auxCity);
     }
 
