@@ -8,7 +8,7 @@
 class MontecarloHeuristic
 {
 public:
-    static Route solveMontecarlo(Problem problem, int iterations);
+    static double solveMontecarlo(Problem problem, int iterations, int argc, char **argv);
 };
 
 #endif // MONTECARLOHEURISTIC_H

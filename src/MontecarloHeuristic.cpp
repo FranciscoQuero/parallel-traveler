@@ -8,44 +8,71 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include "mpi.h"
 
 using namespace std;
 
-Route MontecarloHeuristic::solveMontecarlo(Problem problem, int iterations) {
+double MontecarloHeuristic::solveMontecarlo(Problem problem, int iterations, int argc, char **argv) {
     vector<int> routeInt;
     int totalCities = problem.getNumberOfCities();
-    double totalCost = 0;
+    double definitiveCost;
     vector<vector<int > > routeOrderMatrix;
     Route lessCostRoute = Route(0);
-    srand (time(NULL));
+    //srand (time(NULL));
 
+    int iproc, nproc;
+
+    routeInt.resize(totalCities);
+    routeOrderMatrix.resize(iterations);
     for (int i = 0; i < totalCities; i++)
-        routeInt.push_back(i);
+        routeInt[i] = i;
 
-    // We do not parallelize this for loop because the rand calls slow down the process because of the shared access
-    for (int i = 0; i < iterations; i++){
+    //MPI_Scatter(routeOrderMatrix.data(), 4, MPI_FLOAT, routeOrderMatrix.data(), 4, MPI_FLOAT, 0, MPI_COMM_WORLD);
+    //for (int i = iproc; i < iterations; i+=nproc){
+    if (MPI_Init(&argc, &argv) != MPI_SUCCESS) exit(1);
+    MPI_Comm_rank(MPI_COMM_WORLD, &iproc);
+    MPI_Comm_size(MPI_COMM_WORLD, &nproc);
+    srand(time(NULL) + iproc);
+    double totalCost = 0;
+
+    for (int i = iproc; i < iterations; i+=nproc) {
         for (int j = 0; j < totalCities; j++) {
             int randomInt = j + rand() % (totalCities - j);
             swap(routeInt[j], routeInt[randomInt]);
         }
-        routeOrderMatrix.push_back(routeInt);
+        routeOrderMatrix[i] = routeInt;
+    }
+    //MPI_Bcast(&routeOrderMatrix, iterations*totalCities, MPI_INT, 0, MPI_COMM_WORLD);
+
+
+    /*if (iproc == 0) {
+        MPI_Bcast(&routeOrderMatrix, iterations, MPI_INT, iproc, MPI_COMM_WORLD);
     }
 
-    #pragma omp parallel for firstprivate(problem) shared(routeOrderMatrix, totalCities, totalCost, iterations) schedule(static)
-    for (int i = 0; i < iterations; i++){
+    MPI_Barrier(MPI_COMM_WORLD);*/
+
+    for (int i = iproc; i < iterations; i+=nproc){
         vector <int> currentRouteOrder = routeOrderMatrix[i];
+
         Route route = Route(totalCities);
 
         for (int j = 0; j < totalCities; j++)
             route.addCity(currentRouteOrder[j]);
 
         double currentCost = problem.cost(route);
+        //cout << currentCost << " rank: " << iproc << endl;
 
-        if (i == 0 || totalCost > currentCost) {
+        if (i == iproc || totalCost > currentCost) {
+            //cout << " -> Found a cost of " << currentCost << " iteration: " << i << " rank: " << iproc << endl;
             totalCost = currentCost;
             lessCostRoute = route;
         }
     }
-    lessCostRoute.setCost(totalCost);
-    return lessCostRoute;
+    cout << "Best: " << totalCost << " rank: " << iproc << endl;
+
+    MPI_Reduce(&totalCost, &definitiveCost, 1, MPI_DOUBLE, MPI_MIN, 0, MPI_COMM_WORLD);
+    //MPI_Finalize();
+    //cout << "Best: " << definitiveCost << endl;
+    //lessCostRoute.setCost(totalCost);
+    return definitiveCost;
 }

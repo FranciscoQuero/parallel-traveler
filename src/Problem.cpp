@@ -1,6 +1,7 @@
 #include <vector>
 #include "City.h"
 #include "Route.h"
+#include <iostream>
 
 using namespace std;
 
@@ -60,6 +61,5 @@ double Problem::cost(Route route){
         City auxCity = cities.at(route.getCities(i+1));
         distance += currentCity.calculateEuclideanDistance(auxCity);
     }
-
     return distance;
 }

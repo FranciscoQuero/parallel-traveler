@@ -8,6 +8,7 @@
 #include "MainTSP.h"
 #include <stdlib.h>
 #include <omp.h>
+#include "mpi.h"
 
 using namespace std;
 
@@ -41,8 +42,13 @@ Problem readCitiesFromFile(string filename) {
 
 int main (int argc, char **argv) {
     double startTime, endTime, duration;
-    int iterations = 10000;
+    int iterations = 10000, iproc, nproc;
     string filename = "file.txt";
+
+    // MPI stuff
+
+    double t;	/* tiempo */
+
 
     if (argc < 3) {
         cout << "You should provide the number of iterations and the filename. Using 10,000 iterations and file.txt\n";
@@ -55,14 +61,24 @@ int main (int argc, char **argv) {
 
     //cout.precision(8);
     startTime = omp_get_wtime();
-    Route route = MontecarloHeuristic::solveMontecarlo(problem, iterations);
-    endTime = omp_get_wtime();
-    duration = endTime - startTime;
 
+    double cost = MontecarloHeuristic::solveMontecarlo(problem, iterations, argc, argv);
+    //double cost = route.getCost();
+    //MPI_Bcast(&route, 1, Route, iproc, MPI_COMM_WORLD);
+
+    //MPI_Reduce(&lsum,&sum,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD);
+    endTime = omp_get_wtime();
+    MPI_Comm_rank(MPI_COMM_WORLD, &iproc);
+    MPI_Comm_size(MPI_COMM_WORLD, &nproc);
+    if (iproc == 0) {
+    duration = endTime - startTime;
     cout << "Time spent: " << duration << " s." << endl;
-    cout << "Best cost: " << route.getCost() << endl;
-    if (route.getNumberOfCities() < 150)
-        cout << "Best route found: " << route.toString() << "\n\n";
+    cout << "Best cost: " << cost << endl;
+    //if (route.getNumberOfCities() < 150)
+    //    cout << "Best route found: " << route.toString() << "\n\n";
+    //MPI_Finalize();
+    }
+    MPI_Finalize();
 
     return 0;
 }
