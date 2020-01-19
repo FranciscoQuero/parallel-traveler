@@ -45,10 +45,6 @@ int main (int argc, char **argv) {
     int iterations = 10000, iproc, nproc;
     string filename = "file.txt";
 
-    // MPI stuff
-
-    double t;	/* tiempo */
-
 
     if (argc < 3) {
         cout << "You should provide the number of iterations and the filename. Using 10,000 iterations and file.txt\n";
@@ -59,14 +55,8 @@ int main (int argc, char **argv) {
 
     Problem problem = readCitiesFromFile(filename);
 
-    //cout.precision(8);
     startTime = omp_get_wtime();
-
     double cost = MontecarloHeuristic::solveMontecarlo(problem, iterations, argc, argv);
-    //double cost = route.getCost();
-    //MPI_Bcast(&route, 1, Route, iproc, MPI_COMM_WORLD);
-
-    //MPI_Reduce(&lsum,&sum,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD);
     endTime = omp_get_wtime();
     MPI_Comm_rank(MPI_COMM_WORLD, &iproc);
     MPI_Comm_size(MPI_COMM_WORLD, &nproc);
@@ -74,9 +64,6 @@ int main (int argc, char **argv) {
     duration = endTime - startTime;
     cout << "Time spent: " << duration << " s." << endl;
     cout << "Best cost: " << cost << endl;
-    //if (route.getNumberOfCities() < 150)
-    //    cout << "Best route found: " << route.toString() << "\n\n";
-    //MPI_Finalize();
     }
     MPI_Finalize();
 
